@@ -4,7 +4,7 @@
 ## Introduction
 In this project, I was given a csv dataset for house sales in King County, WA to optimize a multiple linear regression model to predict house sale price. The original dataset contains 21596 rows with 21 columns, which includes home ID (notably not a unique key since a home could be sold more than once in this period), sale date, and price (our target dependent variable.
 
-The libraries I used: 
+The libraries I used in Python were:
 * pandas for data analysis
 * numpy for scientific computation
 * matplotlib and seaborn plotting
@@ -30,23 +30,67 @@ Before proceeding with the visualizations, I conducted the below steps to ensure
 
 This left me with 20,064 rows of data, and 18 dependent variables.
 
-## Data Visualization
+## Data Visualization to Answer Questions
+
 
 ### Bedrooms and Price per Square Foot
 
-In order to answer my first question, I created a boxplot of the price per square foot for each number of bedrooms. As I had removed outliers from this column with a z-score above 3, the highest number of bedrooms in my dataset is 6. 
-![Price Per Square Foot Based on # of Bedrooms](dsc-mod-2-project-v2-1-onl01-dtsc-ft-012120/Bdrooms_1.png)
+In order to answer my first question, I created a boxplot in Matplotlib and Seaborn of the price per square foot for each number of bedrooms. As I had removed outliers from this column with a z-score above 3, the highest number of bedrooms in my dataset is 6. 
+![Price Per Square Foot Based on # of Bedrooms](Images/Bdrooms_1.png)
 
-As we can see from the boxplot, there is a definite economy of scale up until we hit 4 bedrooms, at which point the price per square foot begins to increase. It is clear as well that purchasing a one-bedroom house is will almost certainly not be economical per square foot, and you can pay upwards of $800 per foot, higher than any other house size. 
+I created an additional visualization in Seaborn and Matplotlib using a Facet Grid for houses with between 2 and 5 bedrooms to show a histogram of pricing for each # of bedrooms.
 
-![Number of Home Sales By Price Point Based on # of Bedrooms](dsc-mod-2-project-v2-1-onl01-dtsc-ft-012120/Bdrooms2.png)
-
-We can also see from this facet plot of histograms that over this period the most homes were sold that had 3 or 4 bedrooms. I limited this to only 2-5 bedrooms as there were very few homes sold over this time period that had 1 or 6 bedrooms. If one is in the market for a 4 bedroom home, there may be more supply across various price ranges, but note that there may be many other buyers in the market for homes around this size.
+![Number of Home Sales By Price Point Based on # of Bedrooms](Images/Bdrooms_2.png)
 
 
 ### Square Feet of Lots and Houses (Above Ground)
 
-I next wanted to look at what how the square feet of homes and their lot sizes changed throughout the decades, based on the Built Year of the home.  
+The next visualization in Seaborn and Matplotlib examines how the square feet of homes and their lot sizes changed throughout the decades, based on the Built Year of the home.  
 
-![Number of Home Sales By Price Point Based on # of Bedrooms](dsc-mod-2-project-v2-1-onl01-dtsc-ft-012120/TotalSqft1.png)
+![Square Feet of Lots and SqFt Above Ground Over Time](Images/TotalSqft1.png)
+
+### Mapping Density of Sales and Home Prices
+
+The next set of visualizations aim to illustrate our house sales using longitude and latitude data. 
+
+The first visualization is a pandas scatterplot with a colorbar indicating house sale price.
+
+![House Sales Mapped by Price](Home_Prices.png)
+
+Next, I worked in Folium to create an interactive map showing density of house sales, with markers indicating the headquarters locations for Amazon and Microsoft. Below are two zoomed in screenshots from Folium.
+
+![Amazon Headquarters and Surrounding House Sale Density](Images/Amazon_HQ.png)
+
+![Microsoft Headquarters and Surrounding House Sale Density](Images/Microsoft_HQ.png)
+
+The last map was created in Bokeh using and similarly to the first map, shows the price of homes binned by color, with a basemap from GoogleMaps.
+
+![Glyphs Plotted Over Google Maps Showing House Sale Prices](http://localhost:8888/view/Images/Bokeh%20Scatter.png)
+
+## Multiple Linear Regression Modelling
+
+### Model 1
+
+My baseline model was created in statsmodels with all of the variables as-is with no modifications to the categorical variables, log transformations or feature scaling. I dropped the columns related to location (latitude/longitude and zipcode), as well as date and yr_built, which based on exploratory visualizations have no bearing on the price. Surprisingly, this baseline model returns an adjusted r-squared of 0.899.
+
+### Model 2
+
+My next model was created in statsmodels. In order to better meet assumptions for linear regression, I one-hot encoded several variables ('sqft_basement', 'view', 'yr_renovated', 'zipcode', 'grade', 'category') and log-transformed/feature scaled the continuous variables ('bedrooms', 'bathrooms', 'floors', 'sqft_above', 'sqft_living15', 'sqft_lot15'). The adjusted r-squared for this model is 0.933, a definite improvement on the prior, and is the best model of thr four I created.
+
+### Model 3
+
+I used Scikit-learn for the third model, breaking my data into a train-test split as well as Recursive Feature Elimination to cut the number of variables in half. This was the least accurate of my four models, and resulted in an adjusted r-squared of 0.749.
+
+### Model 4
+
+Last but not least, I used a Flatiron School-provided function to perform Stepwise selection on my independent variables, with a threshold in of .01 and a threshold out of .05, adding any features with a p-value of the threshold in and working backwards in the model after every added feature to remove features with p-value that exceeds .05. This final model resulted in an adjusted r-squared of 0.930, slightly worse than the second model. 
+
+## Next Steps
+
+I would like to continue working with the geolocation data to better achieve better accuracy of my model, as well as improve the maps in Folium and Bokeh to illustrate the importance of location in determining house price. 
+
+## Conclusion
+
+As my most effective model was the second, it was surprising that neither Stepwise selection nor Recursive Feature Elimination enhanced my model. However, based on the coefficients and p-values for my dataset, the features that were most impactful on house sales are square feet of living space, whether the house was viewed, basement, and renovated. Based on the maps, zipcode and latitude/longitude also have a significant impact on cost.
+
 
