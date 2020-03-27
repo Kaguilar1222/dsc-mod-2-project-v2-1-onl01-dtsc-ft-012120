@@ -36,18 +36,19 @@ This left me with 20,064 rows of data, and 18 dependent variables.
 ### Bedrooms and Price per Square Foot
 
 In order to answer my first question, I created a boxplot in Matplotlib and Seaborn of the price per square foot for each number of bedrooms. As I had removed outliers from this column with a z-score above 3, the highest number of bedrooms in my dataset is 6. 
-![Price Per Square Foot Based on # of Bedrooms](Images/Bdrooms_1.png)
+<img src="Images/Bdrooms_1.png" alt="Price Per Square Foot Based on # of Bedrooms" width="400" height="400"/>
+
 
 I created an additional visualization in Seaborn and Matplotlib using a Facet Grid for houses with between 2 and 5 bedrooms to show a histogram of pricing for each # of bedrooms.
 
-![Number of Home Sales By Price Point Based on # of Bedrooms](Images/Bdrooms_2.png)
-
+<img src="Images/Bdrooms_2.png" alt="Number of Home Sales By Price Point Based on # of Bedrooms" width="400" height="400"/>
 
 ### Square Feet of Lots and Houses (Above Ground)
 
 The next visualization in Seaborn and Matplotlib examines how the square feet of homes and their lot sizes changed throughout the decades, based on the Built Year of the home.  
 
-![Square Feet of Lots and SqFt Above Ground Over Time](Images/TotalSqft1.png)
+<img src="Images/TotalSqft1.png" alt="Square Feet of Lots and SqFt Above Ground Over Time" width="400" height="400"/>
+
 
 ### Mapping Density of Sales and Home Prices
 
@@ -55,17 +56,17 @@ The next set of visualizations aim to illustrate our house sales using longitude
 
 The first visualization is a pandas scatterplot with a colorbar indicating house sale price.
 
-![House Sales Mapped by Price](Images/Home_Prices.png)
+<img src="Images/Home_Prices.png" alt="House Sales Mapped by Price" width="500" height="400"/>
 
 Next, I worked in Folium to create an interactive map showing density of house sales, with markers indicating the headquarters locations for Amazon and Microsoft. Below are two zoomed in screenshots from Folium.
 
-![Amazon Headquarters and Surrounding House Sale Density](Images/Amazon_HQ.png)
+<img src="Images/Amazon_HQ.png" alt="Amazon Headquarters and Surrounding House Sale Density" width="500"/>
 
-![Microsoft Headquarters and Surrounding House Sale Density](Images/Microsoft_HQ.png)
+<img src="Images/Microsoft_HQ.png" alt="Microsoft Headquarters and Surrounding House Sale Density" width="500"/>
 
 The last map was created in Bokeh using and similarly to the first map, shows the price of homes binned by color, with a basemap from GoogleMaps.
 
-![Glyphs Plotted Over Google Maps Showing House Sale Prices](Images/Bokeh%20Scatter.png)
+<img src="Images/Bokeh%20Scatter.png" alt="Glyphs Plotted Over Google Maps Showing House Sale Prices" width="400" height="400"/>
 
 ## Multiple Linear Regression Modelling
 
