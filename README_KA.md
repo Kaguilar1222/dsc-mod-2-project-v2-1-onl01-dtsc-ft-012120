@@ -55,7 +55,7 @@ The next set of visualizations aim to illustrate our house sales using longitude
 
 The first visualization is a pandas scatterplot with a colorbar indicating house sale price.
 
-![House Sales Mapped by Price](Home_Prices.png)
+![House Sales Mapped by Price](Images/Home_Prices.png)
 
 Next, I worked in Folium to create an interactive map showing density of house sales, with markers indicating the headquarters locations for Amazon and Microsoft. Below are two zoomed in screenshots from Folium.
 
@@ -65,7 +65,7 @@ Next, I worked in Folium to create an interactive map showing density of house s
 
 The last map was created in Bokeh using and similarly to the first map, shows the price of homes binned by color, with a basemap from GoogleMaps.
 
-![Glyphs Plotted Over Google Maps Showing House Sale Prices](http://localhost:8888/view/Images/Bokeh%20Scatter.png)
+![Glyphs Plotted Over Google Maps Showing House Sale Prices](Images/Bokeh%20Scatter.png)
 
 ## Multiple Linear Regression Modelling
 
